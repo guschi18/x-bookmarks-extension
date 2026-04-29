@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "X Bookmarks Sync",
+  "version": "1.0.0",
+  "description": "Synchronisiert X/Twitter Bookmarks mit dem X-Bookmarks Dashboard",
+  "permissions": ["tabs", "storage", "activeTab", "webRequest", "scripting"],
+  "host_permissions": [
+    "https://x.com/*",
+    "https://twitter.com/*",
+    "https://x-bookmarks.de/*",
+    "https://x-bookmarks-de.vercel.app/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://x-bookmarks-de.vercel.app/*",
+      "https://x-bookmarks.de/*",
+      "http://localhost:3000/*"
+    ]
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "js": ["content_main.js"],
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "js": ["content.js"],
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

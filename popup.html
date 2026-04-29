@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>X Bookmarks Sync</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #09090b;
+      color: #e4e4e7;
+      width: 280px;
+      padding: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .header h1 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f4f4f5;
+    }
+
+    .header .logo {
+      width: 24px;
+      height: 24px;
+      background: #1d9bf0;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .status-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.idle             { background: #52525b; }
+    .dot.running          { background: #1d9bf0; animation: pulse 1.2s infinite; }
+    .dot.waitingForLogin  { background: #eab308; animation: pulse 1.2s infinite; }
+    .dot.done             { background: #22c55e; }
+    .dot.error            { background: #ef4444; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    .stats {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+      padding: 8px 10px;
+    }
+
+    .stat .val  { font-size: 18px; font-weight: 700; color: #f4f4f5; }
+    .stat .lbl  { font-size: 10px; color: #71717a; margin-top: 2px; }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #52525b;
+      text-align: center;
+    }
+
+    .footer a { color: #1d9bf0; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">X</div>
+    <h1>X Bookmarks Sync</h1>
+  </div>
+
+  <div class="status-card">
+    <div class="status-row">
+      <div class="dot" id="dot"></div>
+      <span id="status-text">Bereit</span>
+    </div>
+    <div class="stats" id="stats" style="display:none">
+      <div class="stat">
+        <div class="val" id="stat-imported">—</div>
+        <div class="lbl">Importiert</div>
+      </div>
+      <div class="stat">
+        <div class="val" id="stat-fetched">—</div>
+        <div class="lbl">Gefunden</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://x-bookmarks.app/dashboard" target="_blank">Dashboard öffnen</a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
